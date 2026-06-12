@@ -34,32 +34,14 @@ fetch("https://docs.google.com/spreadsheets/d/1Ky4zXNJVvZd1QRqBlL6yZnGdOIsuzu47N
 .then(response => response.text())
 .then(csv => {
 
-    const rows = csv.trim().split("\n");
+    console.log("CSV DATA:");
+    console.log(csv);
 
-    let html = "";
+    document.body.innerHTML += "<pre>" + csv + "</pre>";
 
-    rows.forEach((row, index) => {
-
-        const cols = row.split(",");
-
-        html += "<tr>";
-
-        cols.forEach(col => {
-            if (index === 0) {
-                html += `<th>${col}</th>`;
-            } else {
-                html += `<td>${col}</td>`;
-            }
-        });
-
-        html += "</tr>";
-    });
-
-    document.getElementById("table").innerHTML = html;
 })
 .catch(error => {
     console.error(error);
-    document.body.innerHTML += `<p>Error: ${error}</p>`;
 });
 </script>
 
