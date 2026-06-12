@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #e6ffe6;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contact Us</h1>
+
+    <input type="text" id="name" placeholder="Enter your name">
+    <button onclick="greet()">Submit</button>
+
+    <p id="result"></p>
+
+    <script>
+        function greet() {
+            let name = document.getElementById("name").value;
+            document.getElementById("result").innerHTML =
+                "Hello, " + name + "!";
+        }
+    </script>
+
+    <br><br>
+
+    <a href="index.html">Home</a> |
+    <a href="about.html">About</a>
+
+</body>
+</html>
