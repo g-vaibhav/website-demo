@@ -37,21 +37,73 @@
 
 <table id="table"></table>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Records</h2>
+
+<table id="table"></table>
+
 <script>
 fetch("https://docs.google.com/spreadsheets/d/1Ky4zXNJVvZd1QRqBlL6yZnGdOIsuzu47NdPEyZgTqPs/export?format=csv&gid=0")
 .then(response => response.text())
 .then(csv => {
 
-    console.log("CSV DATA:");
-    console.log(csv);
+    const rows = csv.trim().split("\n");
 
-    document.body.innerHTML += "<pre>" + csv + "</pre>";
+    let html = "";
 
+    rows.forEach((row, index) => {
+
+        const cols = row.split(",");
+
+        html += "<tr>";
+
+        cols.forEach(col => {
+            if (index === 0) {
+                html += `<th>${col}</th>`;
+            } else {
+                html += `<td>${col}</td>`;
+            }
+        });
+
+        html += "</tr>";
+    });
+
+    document.getElementById("table").innerHTML = html;
 })
 .catch(error => {
     console.error(error);
+    document.body.innerHTML += `<p>Error: ${error}</p>`;
 });
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
