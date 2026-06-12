@@ -1,47 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Records</title>
+    <title>College Portal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Student Records</h2>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="students.html">Students</a>
+    <a href="placements.html">Placements</a>
+    <a href="notices.html">Notices</a>
+    <a href="contact.html">Contact</a>
+</nav>
 
-<table border="1" id="table"></table>
+<h1>College Portal</h1>
 
-<script>
-fetch("https://docs.google.com/spreadsheets/d/1Ky4zXNJVvZd1QRqBlL6yZnGdOIsuzu47NdPEyZgTqPs/export?format=csv&gid=0")
-.then(response => response.text())
-.then(csv => {
-
-    console.log(csv);
-
-    const rows = csv.trim().split("\n");
-
-    let html = "";
-
-    rows.forEach((row, index) => {
-        const cols = row.split(",");
-
-        html += "<tr>";
-
-        cols.forEach(col => {
-            if(index === 0)
-                html += `<th>${col}</th>`;
-            else
-                html += `<td>${col}</td>`;
-        });
-
-        html += "</tr>";
-    });
-
-    document.getElementById("table").innerHTML = html;
-})
-.catch(error => {
-    console.error(error);
-    document.body.innerHTML += "<p>Error: " + error + "</p>";
-});
-</script>
+<p>Welcome to the Student Management Portal.</p>
 
 </body>
 </html>
