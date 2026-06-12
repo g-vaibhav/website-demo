@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f8ff;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Student Database</title>
 </head>
 <body>
 
-    <h1>Welcome to My Website</h1>
+<h2>Student Records</h2>
 
-    <button onclick="changeColor()">Change Background</button>
+<table border="1" id="table">
+</table>
 
-    <br><br>
+<script>
+fetch("https://opensheet.elk.sh/1Ky4zXNJVvZd1QRqBlL6yZnGdOIsuzu47NdPEyZgTqPs/Sheet1")
+.then(response => response.json())
+.then(data => {
 
-    <a href="about.html">
-        <button>Go to About Page</button>
-    </a>
+    let html = `
+    <tr>
+        <th>Name</th>
+        <th>Branch</th>
+        <th>CGPA</th>
+    </tr>`;
 
-    <a href="contact.html">
-        <button>Go to Contact Page</button>
-    </a>
+    data.forEach(student => {
+        html += `
+        <tr>
+            <td>${student.Name}</td>
+            <td>${student.Branch}</td>
+            <td>${student.CGPA}</td>
+        </tr>`;
+    });
 
-    <script>
-        function changeColor() {
-            document.body.style.backgroundColor =
-                "#" + Math.floor(Math.random()*16777215).toString(16);
-        }
-    </script>
+    document.getElementById("table").innerHTML = html;
+});
+</script>
 
 </body>
 </html>
