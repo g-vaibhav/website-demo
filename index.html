@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Database</title>
+    <title>Student Records</title>
 </head>
 <body>
 
 <h2>Student Records</h2>
 
-<table border="1" id="table">
-</table>
+<table border="1" id="table"></table>
 
 <script>
 fetch("https://docs.google.com/spreadsheets/d/1Ky4zXNJVvZd1QRqBlL6yZnGdOIsuzu47NdPEyZgTqPs/export?format=csv&gid=0")
 .then(response => response.text())
 .then(csv => {
 
-    let rows = csv.trim().split("\n");
+    console.log(csv);
+
+    const rows = csv.trim().split("\n");
 
     let html = "";
 
     rows.forEach((row, index) => {
-
-        let cols = row.split(",");
+        const cols = row.split(",");
 
         html += "<tr>";
 
@@ -36,6 +36,10 @@ fetch("https://docs.google.com/spreadsheets/d/1Ky4zXNJVvZd1QRqBlL6yZnGdOIsuzu47N
     });
 
     document.getElementById("table").innerHTML = html;
+})
+.catch(error => {
+    console.error(error);
+    document.body.innerHTML += "<p>Error: " + error + "</p>";
 });
 </script>
 
